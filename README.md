@@ -8,18 +8,14 @@
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
-
-     Milestone 5. -->
+This RAG system answers question about the corpus ```city_guides```. This corpus contains information for travelers wanting to visit the various cities described. There is information for how to get to, what to see, places to eat, and places to stay for every city. The corpus also includes information on how the cities are connected to each other to help travelers plan a trip visiting multiple cites. The RAG system aims to pull relevant information to answer any user questions about the cities.
 
 ## Chunking Strategy
 
 **Chunk size: 800**
 **Overlap: 75**
 
-I kept the chunk size the same as the default because each chunk captured key ideas of a city without being too long. However, I did make my chunker create smaller chunks when it detected more than 6 paragraphs to try to bundle different, smaller paragraphs together. I mmade the overlap quite small as each the corpus often contains somewhat granular information through small paragraphs. 
+I kept the chunk size the same as the default because each chunk captured key ideas of a city without being too long. However, I did make my chunker create smaller chunks when it detected more than 6 paragraphs to try to bundle different, smaller paragraphs together. I made the overlap quite small as each the corpus often contains somewhat granular information through small paragraphs. 
 
 <!-- What about YOUR documents made you pick these numbers? Short posts and
      long sectioned guides don't want the same chunking, and "800 seemed
@@ -156,22 +152,22 @@ I decided to use a cutoff of 0.65 (0.05 higher than the original) because the or
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| What times are Brightwater's markets open? | Yes | 0.436 |
+| When should I go to visit Kestrelford and what can I do there? | Yes | 0.491 |
+| How long does it take to drive from Brightwater to Pellew Sands and where can I park? | Yes | 0.389 |
+| What is the capital of Mongolia? | No | 0.944 |
+| How do I change the oil in a diesel engine? | No | 0.862 |
+| Who won the 1994 World Cup? | No | 1.002 |
+| What is the recommended dosage of ibuprofen for a headache? | No | 0.829 |
+| How do I write a for loop in Rust? | No | 0.819 |
 
 ## How I Used AI
 
-<!-- Two specific moments. For each: what you asked for, what came back, and
-     what you changed about it.
-
-     "I asked Claude to write the chunking function from my notes. It ignored
-     the overlap, so I added that myself" is the level of detail we're after.
-     "I used AI to help me code" is not.
-
-     Milestone 5. -->
-
 **1.**
+I asked Claude if making a chunker that had a variable chunk length for this corpus was ideal. It said that it could be helpful so I made my chunker create smaller chunks when needed.
 
 **2.**
+I asked Claude to compute the average distances of the measured distances of the in corpus and out of corpus questions. I used the computed averages.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
