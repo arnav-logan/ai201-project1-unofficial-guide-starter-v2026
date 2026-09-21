@@ -31,38 +31,107 @@
 
 ## Sample Chunks
 
-<!-- Five chunks, pasted as text. Label each one and name the file it came from
-     AND the function that produced it — the grader checks your code against
-     what you claim here.
-
-     `python app.py chunks -n 5` prints all three for you. Copy them straight
-     across.
-
-     Milestone 3. -->
-
-**Chunk 1** — source: `` — produced by: ``
+**Chunk 1** — source: ``guide_accessibility.md#0 — produced by: chunker.py::split_documents``
 
 ```
+# Getting around the region with limited mobility
+
+An honest assessment rather than a promotional one. Some of these places are
+difficult and it is better to know in advance.
+
+## Straightforward
+
+**Thornby Wells** is the easiest town in the region. It is flat, compact, and
+everything is within three minutes of everything else. Parking is free for two
+hours anywhere in town and the station is central. The pump room and gardens
+are level throughout.
+
+**Marchwood** has a modern tram network with level boarding on all four lines,
+running every 8 minutes on weekdays. The city museum and covered market are both
+step-free. The distances between districts are the main consideration.
+
+**Brightwater** is level along the river and through the centre. The mill museum
+is step-free. The station is a 15-minute wal
+
 ```
 
-**Chunk 2** — source: `` — produced by: ``
+**Chunk 2** — source: ``guide_corry_vale.md#1 — produced by: chunker.py::split_documents``
 
 ```
-```
+it must be booked a day ahead. Most visitors drive between villages and walk the footpaths in between.
 
-**Chunk 3** — source: `` — produced by: ``
+## Eat and drink
 
-```
-```
+One pub in the largest village serves food seven days a week. A second, in the third village, opens Thursday to Sunday. There is a farm shop at the valley mouth that sells bread,alley beyond a school bus that will carry passengers if there is room. Driving from Brightwater takes 35 minutes on a good road as far as the valley mouth and then 20 more on a poor one. Cycling in is a serious undertaking; the road climbs 400 metres in the first four miles.
 
-**Chunk 4** — source: `` — produced by: ``
+## Getting around
 
-```
-```
-
-**Chunk 5** — source: `` — produced by: ``
+Nothing within the valley is walkable from anything else — the villages are two to four miles apart. There is one taxi, based in the largest village, and it must be booked a day ahead. Most visitors drive between v
 
 ```
+
+**Chunk 3** — source: ``guide_givens_mill.md#0 — produced by: chunker.py::split_documents``
+
+```
+# Givens Mill
+
+Givens Mill is a village of 700 built around a working watermill that still grinds flour commercially. It is the sort of place people visit for an afternoon and then talk about for longer than the visit lasted.
+
+## Getting there
+
+No station and no bus on Sundays; four buses a day from Brightwater on weekdays, taking 30 minutes. Driving is 20 minutes. The village car park holds about forty cars and is full by 11am on summer Saturdays.
+
+## Getting around
+
+Everything is on one street along the river. The mill is at one end and the church at the other, eight minutes apart. The riverside path continues in both directions for as far as you want to walk.
+
+## Eat and drink
+
+```
+
+**Chunk 4** — source: ``guide_kestrelford.md#2 — produced by: chunker.py::split_documents``
+
+```
+modation of any kind within four miles of the town in either direction.
+
+## When to go
+
+Late spring and early autumn. The Saturday market runs year-round but is much reduced from November to February. August is busy with walkers. The single-trackapproach road is genuinely difficult in snow and theand the trackbed is now a walking route. Buses run from Brightwater roughly hourly on weekdays, every two hours on Saturdays, and not at all on Sundays. Driving takes 55 minutes and the last eight are on a single-track road with passing places.
+
+## Getting around
+
+Everything is within a ten-minute walk of the market square. The town is built on a slope and the walk up from the lower car park is steeper than it looks on a map. There is no local bus service within the town itself.
+
+## Eat and drink
+
+Four pu
+
+```
+
+**Chunk 5** — source: ``guide_regional_transport.md#0 — produced by: chunker.py::split_documents``
+
+```
+# Getting around the region
+
+## The railway
+
+The line runs along the river valley, connecting Brightwater to the regional
+hub in 50 minutes. Eleven services a day on weekdays, six on Sundays. The line
+north of Brightwater closed in 1963 and everything beyond it is bus or car.
+
+Tickets are cheaper booked the day before than on the day, and considerably
+cheaper than that booked a week ahead. There is no ticket office at
+Brightwater station outside weekday mornings; the machine on the platform takes
+cards only.
+
+## Buses
+
+Three operators run in the region and they do not accept each other's tickets,
+which is the single most common source of confusion for visitors. Services
+concentrate on weekday daytimes. Sunday service is minimal to non-existent
+outside the Brightwater town routes.
+
+The Kestrelford se
 ```
 
 ## Sample Answer

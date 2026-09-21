@@ -81,23 +81,45 @@ def fallback_split(
 
 
 def split_documents(documents: list[Document]) -> list[Chunk]:
-    """
-    Split documents into chunks. ⚠️ REPLACE THE BODY OF THIS IN MILESTONE 3.
+    
+    chunk_size = config.CHUNK_SIZE
+    overlap = config.CHUNK_OVERLAP
+    min_chunk = 300
+    iterate_amount = 30
+    paragraph_end_limit = 6
 
-    Right now it just calls the fallback. That is the plain, generic behaviour
-    the brief is talking about.
+    if overlap >= chunk_size:
+        raise ValueError("overlap has to be smaller than chunk_size")
 
-    When you write your own strategy, set `produced_by` to
-    "chunker.py::split_documents" so your README's Sample Chunks section names
-    the right function. `app.py chunks` prints that string for you.
+    chunks: list[Chunk] = []
+    for doc in documents:
+        start = 0
+        index = 0
+        while start < len(doc.text):
+            cur_size = min_chunk
+            piece = doc.text[start : start + min_chunk].strip()
 
-    Things worth thinking about before you write any code:
-      - Are your documents short posts or long guides?
-      - Is the useful information in one sentence, or spread over a paragraph?
-      - Would splitting on paragraph breaks keep more thoughts intact than
-        splitting on a character count?
-    """
-    return fallback_split(documents)
+
+            while (cur_size < chunk_size):
+                if (piece.count("\n\n") > paragraph_end_limit):
+                    break
+
+                piece += doc.text[cur_size : cur_size + iterate_amount]
+                cur_size += iterate_amount
+
+            if piece:
+                chunks.append(
+                    Chunk(
+                        text=piece,
+                        source=doc.source,
+                        index=index,
+                        produced_by="chunker.py::split_documents",
+                    )
+                )
+                index += 1
+            start += cur_size - overlap
+
+    return chunks
 
 
 def describe(chunks: list[Chunk]) -> str:
