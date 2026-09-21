@@ -23,8 +23,7 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-<!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+Ideally, the system should produce the right answer all of the time. However, it may only produce part of the answer to questions with two parts. 
 
 ---
 
@@ -33,8 +32,7 @@ contains the answer.
 Every answer the system produces names at least one source document.
 
 **Why this target:**
-<!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
+The system should always be obtaining answers to questions from the documents, and should therefore display the names of documents used to answer the question.
 
 ---
 
@@ -50,8 +48,7 @@ in at least 4 of 5 tries.
      just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
 **Why this target:**
-<!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
+The cutoff should be low enough that unrelated questions are rejected.
 
 ---
 
@@ -68,11 +65,11 @@ in at least 4 of 5 tries.
           sentence cut in half at either end."
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
-
+At least 9 out of 10 sampled chunks pertain to a specific topic in a select city and should not contain information about another city.  
 
 
 **Why this target:**
-
+For the chunks to be efficient, they should not contain a wide variety of information. 
 
 
 ---
@@ -86,11 +83,11 @@ in at least 4 of 5 tries.
      handles badly, about source attribution being correct rather than merely
      present — anything, as long as it names a number or an observable
      outcome. -->
-
+The system should not refuse 3 out of 5 questions that ask about a location without naming a city (ex: What city should I visit if I like nature?)
 
 
 **Why this target:**
-
+The cutoff should be high enough that questions pertaining to corpus without containing key words (such as a city name) are not rejected.
 
 
 ---

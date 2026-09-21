@@ -23,11 +23,11 @@ names a target of "4 of 5", and four of three is not a thing.
 
 QUESTIONS = [
     # {"question": "...", "expects": "..."},
-    {"question": "", "expects": ""},
-    {"question": "", "expects": ""},
-    {"question": "", "expects": ""},
-    {"question": "", "expects": ""},
-    {"question": "", "expects": ""},
+    {"question": "What times are Brightwater's markets open?", "expects": "Tuesday 7am to 1pm"},
+    {"question": "When should I go to visit Kestrelford and what can I do there?", "expects": "Late spring and early autumn; Saturday market"},
+    {"question": "How long does it take to drive from Brightwater to Pellew Sands and where can I park?", "expects": "50 minutes, Seafront parking and free lot"},
+    {"question": "Where are the best places to eat in Marchwood located?", "expects": "Northgate district"},
+    {"question": "What is there to see in Givens Mill?", "expects": "Mill tour"},
 ]
 
 # Questions from a different world entirely. Your gate should refuse all five.
