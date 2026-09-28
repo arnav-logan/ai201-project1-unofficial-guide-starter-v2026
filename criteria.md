@@ -65,8 +65,9 @@ The cutoff should be low enough that unrelated questions are rejected.
           sentence cut in half at either end."
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
-At least 9 out of 10 sampled chunks pertain to a specific topic in a select city and should not contain information about another city.  
-
+At least 9 out of 10 sampled chunks pertain to a specific topic in a select city and should not contain information about another city.
+Revision: At least 4 out of 5 sampled chunks pertain to a specific topic in a select city and should not contain information about another city.
+Reason: The system only provided 5 sample chunks
 
 **Why this target:**
 For the chunks to be efficient, they should not contain a wide variety of information. 
