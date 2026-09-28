@@ -199,8 +199,8 @@ I asked Claude to compute the average distances of the measured distances of the
 | 1. Retrieved chunk contains the answer | 4 of 5 | 3/5 | 3/5 | 3/5 | MISSED |
 | 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
 | 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
-| 4. Sampled chunks pertain to a specific topic in a select city and should not contain information about another city.  | 4 of 5 | 4/5 | 4/5 | 4/5 | MET |
-| 5. The system should not refuse questions that ask about a location without naming a city. | 3 of 5 | 4/5 | 4/5 | 4/5 | MET |
+| 4. Sampled chunks pertain to a specific topic in a select city and should not contain information about another city  | 4 of 5 | 4/5 | 4/5 | 4/5 | MET |
+| 5. The system should not refuse questions that ask about a location without naming a city | 3 of 5 | 4/5 | 4/5 | 4/5 | MET |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
@@ -277,7 +277,7 @@ Based on `guide_givens_mill.md`, Givens Mill features a "working watermill that 
 | What is the recommended dosage of ibuprofen for a headache? | 0.829 | refused |
 | How do I write a for loop in Rust? | 0.819 | refused |
 
-## Criterion 4 - Sampled chunks pertain to a specific topic in a select city and should not contain information about another city.
+## Criterion 4 - Sampled chunks pertain to a specific topic in a select city and should not contain information about another city
 (All of the following text from printing to terminal, produced by ``chunker.py::split_documents``)
 ```
 ======================================================================
@@ -372,7 +372,7 @@ outside the Brightwater town routes.
 The Kestrelford se
 ```
 
-## Criterion 5 - The system should not refuse questions that ask about a location without naming a city.
+## Criterion 5 - The system should not refuse questions that ask about a location without naming a city
 **Question 1 - What city should I visit to buy pastries? (Pass)**
 ```
 (best distance 0.611, cutoff 0.65)
@@ -420,11 +420,11 @@ According to `guide_seasons.md`, **June** is described as "excellent everywhere.
 
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunk contains the answer | MISSED | For all three runs, the retreived chunk contained the answer only 3/5 times, which missed the 4/5 target. |
+| 2 | Every answer names a source | MET | For each run, every answer either named a source or declared not having enough information to answer the question. |
+| 3 | Gate stops out-of-corpus questions | MET | All 5 out-of-corpus questions were rejected from being answered. |
+| 4 | Sampled chunks pertain to a specific topic in a select city and should not contain information about another city. | MET | In 4/5 sample chunks, the content was focused on describing only one city and not spread across different topics. |
+| 5 | The system should not refuse questions that ask about a location without naming a city. | MET | In all three runs, 4/5 questions that did not name a city were accepted. |
 
 ## Diagnoses
 
