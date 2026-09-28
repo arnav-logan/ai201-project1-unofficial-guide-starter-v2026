@@ -446,6 +446,11 @@ According to `guide_seasons.md`, **June** is described as "excellent everywhere.
 
      Milestone 3. -->
 
+**Missed Criterion 1**
+
+Criterion 1 required the retrieved chunk to contain the answer in 4/5 questions but the system only managed to find the correct answer in 3/5 questions. The most likely cause of not finding the correct answer is improper chunking; either the correct answer was split between two chunks or the retrieved chunk was too large for the LLM to precisely find the answer. 
+
+
 ## The Improvement
 
 **What I changed:**
