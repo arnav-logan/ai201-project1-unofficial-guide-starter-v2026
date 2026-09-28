@@ -85,7 +85,7 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
     chunk_size = config.CHUNK_SIZE
     overlap = config.CHUNK_OVERLAP
     min_chunk = 300
-    iterate_amount = 30
+    iterate_amount = 50
     paragraph_end_limit = 6
 
     if overlap >= chunk_size:
@@ -104,7 +104,7 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
                 if (piece.count("\n\n") > paragraph_end_limit):
                     break
 
-                piece += doc.text[cur_size : cur_size + iterate_amount]
+                piece += doc.text[start + cur_size : start + cur_size + iterate_amount]
                 cur_size += iterate_amount
 
             if piece:

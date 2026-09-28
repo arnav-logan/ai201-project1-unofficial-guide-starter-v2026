@@ -454,8 +454,10 @@ Criterion 1 required the retrieved chunk to contain the answer in 4/5 questions 
 ## The Improvement
 
 **What I changed:**
+Fixed overlap issue with chunker and increased overlap amount.
 
 **Why I picked it:**
+My goal was to create cleaner chunks and reduce answers being split across chunks.
 
 <!-- Connect it to a specific diagnosis above in one sentence. If you can't,
      you picked a fix because it sounded impressive. -->
@@ -467,13 +469,202 @@ Criterion 1 required the retrieved chunk to contain the answer in 4/5 questions 
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 4/5 | 4/5 | 4/5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Sampled chunks pertain to a specific topic in a select city and should not contain information about another city  | 4 of 5 | 4/5 | 4/5 | 4/5 | MET |
+| 5. The system should not refuse questions that ask about a location without naming a city | 3 of 5 | 5/5 | 5/5 | 5/5 | MET |
 
-**Did it help?**
+## Criterion 1 - Retrieved chunk contains the answer
+(All of the following text from ``results\run_2026-09-27_2303_after.md`` produced by ``run_eval.py::run_once``)
+
+**Question 1 - What times are Brightwater's markets open? (Pass)**
+```
+According to `guide_eating.md`, "Brightwater's Tuesday market sets up at 7am in the square and is finished by 1pm."
+```
+
+**Question 2 - When should I go to visit Kestrelford and what can I do there? (Fail)**
+```
+Based on the provided documents, there is no mention of when to visit Kestrelford or what to do there, other than that "most visitors come for" birds during "April to May and September to October" (guide_elder_ness.md), though that document discusses Elder Ness rather than Kestrelford. Therefore, I do not have enough information to answer your specific question about Kestrelford.
+```
+
+**Question 3 - How long does it take to drive from Brightwater to Pellew Sands and where can I park? (Pass)**
+```
+Driving from Brightwater to Pellew Sands takes "50 minutes" (guide_pellew_sands.md). Seafront parking is "metered and expensive," but you can use "the free lot behind the station" which is "a four-minute walk and almost always has space" (guide_pellew_sands.md).
+```
+
+**Question 4 - Where are the best places to eat in Marchwood located? (Pass)**
+```
+According to `guide_marchwood.md`, "The best eating is in the Northgate district, a 12-minute tram ride from the station, where about thirty restaurants sit within four streets."
+```
+
+**Question 5 - What is there to see in Givens Mill? (Pass)**
+```
+According to `guide_givens_mill.md`, visitors can see a "working watermill that still grinds flour commercially" and a "church has a Saxon doorway."
+```
+
+## Criterion 2 - Every answer names a source
+(All of the following text from ``results\run_2026-09-27_2303_after.md`` produced by ``run_eval.py::run_once``)
+
+**Question 1 - What times are Brightwater's markets open? (Pass)**
+```
+According to `guide_eating.md`, "Brightwater's Tuesday market sets up at 7am in the square and is finished by 1pm."
+```
+
+**Question 2 - When should I go to visit Kestrelford and what can I do there? (Pass)**
+```
+Based on the provided documents, there is no mention of when to visit Kestrelford or what to do there, other than that "most visitors come for" birds during "April to May and September to October" (guide_elder_ness.md), though that document discusses Elder Ness rather than Kestrelford. Therefore, I do not have enough information to answer your specific question about Kestrelford.
+```
+
+**Question 3 - How long does it take to drive from Brightwater to Pellew Sands and where can I park? (Pass)**
+```
+Driving from Brightwater to Pellew Sands takes "50 minutes" (guide_pellew_sands.md). Seafront parking is "metered and expensive," but you can use "the free lot behind the station" which is "a four-minute walk and almost always has space" (guide_pellew_sands.md).
+```
+
+**Question 4 - Where are the best places to eat in Marchwood located? (Pass)**
+```
+According to `guide_marchwood.md`, "The best eating is in the Northgate district, a 12-minute tram ride from the station, where about thirty restaurants sit within four streets."
+```
+
+**Question 5 - What is there to see in Givens Mill? (Pass)**
+```
+According to `guide_givens_mill.md`, visitors can see a "working watermill that still grinds flour commercially" and a "church has a Saxon doorway."
+```
+
+## Criterion 3 - Gate stops out-of-corpus questions
+(All of the following text from ``results\run_2026-09-27_2303_after.md`` produced by ``run_eval.py::check_out_of_scope``)
+
+| Out-of-scope question | Best distance | Gate |
+|---|---|---|
+| What is the capital of Mongolia? | 0.887 | refused |
+| How do I change the oil in a diesel engine? | 0.877 | refused |
+| Who won the 1994 World Cup? | 0.811 | refused |
+| What is the recommended dosage of ibuprofen for a headache? | 0.839 | refused |
+| How do I write a for loop in Rust? | 0.822 | refused |
+
+## Criterion 4 - Sampled chunks pertain to a specific topic in a select city and should not contain information about another city
+(All of the following text from printing to terminal, produced by ``chunker.py::split_documents``)
+```
+======================================================================
+Chunk 1  |  source: guide_accessibility.md#0  |  produced by: chunker.py::split_documents (Fail)
+======================================================================
+# Getting around the region with limited mobility
+
+An honest assessment rather than a promotional one. Some of these places are
+difficult and it is better to know in advance.
+
+## Straightforward
+
+**Thornby Wells** is the easiest town in the region. It is flat, compact, and
+everything is within three minutes of everything else. Parking is free for two
+hours anywhere in town and the station is central. The pump room and gardens
+are level throughout.
+
+**Marchwood** has a modern tram network with level boarding on all four lines,
+running every 8 minutes on weekdays. The city museum and covered market are both
+step-free. The distances between districts are the main consideration.
+
+**Brightwater** is level along the river and through the centre. The mill museum
+is step-free. The station is a 15-
+
+======================================================================
+Chunk 2  |  source: guide_corry_vale.md#1  |  produced by: chunker.py::split_documents (Pass)
+======================================================================
+re is one taxi, based in the largest village, and it must be booked a day ahead. Most visitors drive between villages and walk the footpaths in between.
+
+## Eat and drink
+
+One pub in the largest village serves food seven days a week. A second, in the third village, opens Thursday to Sunday. There is a farm shop at the valley mouth that sells bread, cheese and little else, and it closes at 4pm. Bring supplies; this is not a place with options.
+
+## What to see
+
+The valley itself is the attraction. The footpath network is dense and well marked, and a circuit taking in three of the four villages is about nine miles with 500 metres of ascent. The chapel in the second village is 12th century and always unlocked.
+
+## Where to stay
+
+Perhaps thirty beds in the entire valley, spread across two pubs 
+
+======================================================================
+Chunk 3  |  source: guide_givens_mill.md#0  |  produced by: chunker.py::split_documents (Pass)
+======================================================================
+# Givens Mill
+
+Givens Mill is a village of 700 built around a working watermill that still grinds flour commercially. It is the sort of place people visit for an afternoon and then talk about for longer than the visit lasted.
+
+## Getting there
+
+No station and no bus on Sundays; four buses a day from Brightwater on weekdays, taking 30 minutes. Driving is 20 minutes. The village car park holds about forty cars and is full by 11am on summer Saturdays.
+
+## Getting around
+
+Everything is on one street along the river. The mill is at one end and the church at the other, eight minutes apart. The riverside path continues in both directions for as far as you want to walk.
+
+## Eat and drink
+
+A tearoom 
+
+======================================================================
+Chunk 4  |  source: guide_kestrelford.md#2  |  produced by: chunker.py::split_documents (Pass)
+======================================================================
+he pubs. Booking ahead matters between May and September and not at all otherwise. There is no accommodation of any kind within four miles of the town in either direction.
+
+## When to go
+
+Late spring and early autumn. The Saturday market runs year-round but is much reduced from November to February. August is busy with walkers. The single-track approach road is genuinely difficult in snow and the town can be cut off for a day or two most winters.
+
+## Practical notes
+
+Cash is still useful at the market and in smaller places, though cards are
+accepted almost everywhere now. Mobile coverage is good in the centre and
+patchy on the outskirts. The nearest full hospital is in Brightwater; there is
+a minor injuries unit locally with limited hours.
+
+======================================================================
+Chunk 5  |  source: guide_pellew_sands.md#3  |  produced by: chunker.py::split_documents (Pass)
+======================================================================
+irts. The nearest full hospital is in Brightwater; there is
+a minor injuries unit locally with limited hours.
+```
+
+## Criterion 5 - The system should not refuse questions that ask about a location without naming a city
+**Question 1 - What city should I visit to buy pastries? (Pass)**
+```
+(best distance 0.529, cutoff 0.65)
+
+Based on the provided documents, you should visit **Kestrelford**, because "Kestrelford's bakery sells out by 11am" (guide_eating.md).
+```
+
+**Question 2 - Where should I visit to go on a hike? (Pass)**
+```
+(best distance 0.564, cutoff 0.65)
+
+According to `guide_walking.md`, you can hike the **Brightwater river path**, the **Kestrelford trackbed**, or take on the moderate **Corry Vale circuit**, which is "about nine miles with 500 metres of ascent."
+```
+
+**Question 3 - Where is a nice place to stay the night? (Pass)**
+```
+(best distance 0.561, cutoff 0.65)
+
+Based on the provided documents, options for staying overnight include holiday lets and an inn on the harbour in Halden Bay (from `guide_halden_bay.md`), four rooms at the pub or dormitory accommodation at the bird observatory inElder Ness (from `guide_elder_ness.md`), seafront hotels or Marine Terrace guesthouses in Pellew Sands (from `guide_pellew_sands.md`), and guesthouses in Thornby Wells (from `guide_thornby_wells.md`).
+```
+
+**Question 4 - What is the best city to relax in? (Pass)**
+```
+(best distance 0.552, cutoff 0.65)                   
+
+I do not have enough information to answer which city is the best to relax in, as the provided documents do not mention or compare cities based on relaxation.
+```
+
+**Question 5 - Which city should I visit in the summer? (Pass)**
+```
+(best distance 0.503, cutoff 0.65)                   
+
+Based on `guide_seasons.md`, "June is excellent everywhere" during the summer. Alternatively, July and August are mentioned for specific places: Halden Bay becomes very busy (arrive before 10am or use the overflow lot in August),Kestrelford fills with walkers, and Brightwater goes quiet.
+```
+
+
+## Did it help?
+Yes, the edits to the chunker and overlap amount allowed for an increase to 4/5 questions correct from 3/5, making Criteria 1 pass now. Also, Criteria 5 now passes with 5/5 questions being accepted from 4/5 previously.
 
 <!-- Say plainly whether it did, and how you know. If it made things worse,
      say that — a change that backfired, honestly reported, earns full credit
