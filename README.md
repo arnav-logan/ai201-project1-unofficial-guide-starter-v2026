@@ -169,6 +169,9 @@ I asked Claude if making a chunker that had a variable chunk length for this cor
 **2.**
 I asked Claude to compute the average distances of the measured distances of the in corpus and out of corpus questions. I used the computed averages.
 
+**Project 2.**
+Did not use AI for assistance in Project 2.
+
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
      claims earns nothing.
@@ -682,6 +685,7 @@ Yes, the edits to the chunker and overlap amount allowed for an increase to 4/5 
      not.
 
      Milestone 5. -->
+Although all criteria are being met after the fix, the chunker or imbedding process could be improved to be able to correctly answer all 5/5 questions in Criteria 1. Also, some of the distances for questions in Criteria 5 are close to the cutoff, so maybe the system could be improved to accept more general questions while still rejecting unrelated questions.
 
 ## What I'd Do Differently
 
@@ -689,3 +693,4 @@ Yes, the edits to the chunker and overlap amount allowed for an increase to 4/5 
      differently, and why?
 
      Milestone 5. -->
+I would likely rewrite Criteria 4 to not require chunks to contain information on one city only as the documents do occasionally mention multiple cities close together and how they are connected. Rather, Criteria 4 should be rewritten to focus on capturing a standalone idea about a city or multiple cities.  
